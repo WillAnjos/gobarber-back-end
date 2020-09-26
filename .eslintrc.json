@@ -1,10 +1,11 @@
 {
   "env": {
-    "es6": true,
-    "node": true
+    "node": true,
+    "es6": true
   },
   "extends": [
     "airbnb-base",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
@@ -27,17 +28,53 @@
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
     "@typescript-eslint/camelcase": "off",
+    "@no-useles-constructor": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no=spreading": "off",
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-unused-expressions": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "import/no-duplicates": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "@typescript-eslint/no-used-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
     "@typescript-eslint/no-use": [
       "error",
       {
         "argsIgnorePattern": "_"
       }
     ],
+    "@typescript-eslint/interface-name-prefix": [
+      "error",
+      {
+        "prefixWithI": "always"
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
       {
-        "ts": "never"
+        "ts": "never",
+        "tsx": "never"
       }
     ]
   },
