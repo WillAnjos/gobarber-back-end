@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
-import { container } from 'tsyringe';
+// import { container } from 'tsyringe';
 
 import UsersController from '../controllers/UsersController';
 import UserAvatarController from '../controllers/UserAvatarController';
@@ -9,10 +9,9 @@ import UserAvatarController from '../controllers/UserAvatarController';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const usersRouter = Router();
+const usersController = new UsersController();
 const upload = multer(uploadConfig);
 const userAvatarController = new UserAvatarController();
-
-const usersController = new UsersController();
 
 usersRouter.post('/', usersController.create);
 

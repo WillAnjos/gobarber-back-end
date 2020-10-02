@@ -28,7 +28,6 @@ class UserTokensRepository implements IUserTokensRepository {
 
     return userToken;
   }
-
 }
 
 export default UserTokensRepository;
