@@ -4,10 +4,10 @@ import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 
 import Appointment from '../infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
-import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 
 interface IRequest {
   provider_id: string;
@@ -31,7 +31,7 @@ class CreateAppointmentService {
   public async execute({
     date,
     provider_id,
-    user_id
+    user_id,
   }: IRequest): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
 
@@ -50,6 +50,7 @@ class CreateAppointmentService {
 
     const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
       appointmentDate,
+      provider_id,
     );
 
     if (findAppointmentInSameDate) {
@@ -64,11 +65,7 @@ class CreateAppointmentService {
       date: appointmentDate,
     });
 
-    const dateFormatted = format(
-      appointmentDate,
-      "dd/MM/yyyy 'às' HH:mm'h'",
-
-    );
+    const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
 
     await this.notificationsRepository.create({
       recipient_id: provider_id,
@@ -87,3 +84,5 @@ class CreateAppointmentService {
 }
 
 export default CreateAppointmentService;
+
+

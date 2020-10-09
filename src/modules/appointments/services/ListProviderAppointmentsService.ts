@@ -1,7 +1,9 @@
 import { injectable, inject } from 'tsyringe';
+
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import { classToClass } from 'class-transformer';
 import Appointment from '../infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
-import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IRequest {
   provider_id: string;
@@ -33,6 +35,8 @@ class ListProviderAppointmentsService {
       cacheKey,
     );
 
+    // let appointments = null;
+
     if (!appointments) {
       appointments = await this.appointmentsRepository.findAllInDayFromProvider(
         {
@@ -43,10 +47,8 @@ class ListProviderAppointmentsService {
         },
       );
 
-      await this.cacheProvider.save(
-        cacheKey,
-        appointments
-      );
+      await this.cacheProvider.save(cacheKey, classToClass(appointments));
+
     }
 
     return appointments;

@@ -8,9 +8,9 @@ import ProviderDayAvailabilityController from '../controllers/ProviderDayAvailab
 
 const providersRouter = Router();
 
-const providersController = new ProvidersController()
-const providerMonthAvailabilityController = new ProviderMonthAvailabilityController()
-const providerDayAvailabilityController = new ProviderDayAvailabilityController()
+const providersController = new ProvidersController();
+const providerMonthAvailabilityController = new ProviderMonthAvailabilityController();
+const providerDayAvailabilityController = new ProviderDayAvailabilityController();
 
 providersRouter.use(ensureAuthenticated);
 
